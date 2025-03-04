@@ -17,7 +17,7 @@ productRouter.get("/",async(req,res)=> {
             const page =parseInt( req.query.page)|| 1;
             const limit =parseInt( req.query.limit)|| 10;
             const sort = req.query.sort;
-            const querys = req.query.querys;
+            const querys = req.query.querys|| null;
             const products = await productManager.getProductsPagination(page,limit,sort,querys);
       
             var prevlink=null;
