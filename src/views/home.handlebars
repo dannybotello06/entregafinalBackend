@@ -1,0 +1,53 @@
+
+    <h1>HOME</h1>
+    <h2>lista productos</h2>
+ <div class="container">
+
+        {{#each product.docs}}
+       
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt={{this.thumbnail}}>
+  <div class="card-body">
+    <h5 class="card-title">{{this.title}}</h5>
+    <p class="card-text">{{this.price}}</p>
+      <p class="card-text">{{this.description}}</p>
+    <a href="/productDetails/?product={{this.ids}}" class="btn btn-primary">ir a detalles</a>
+    <button onclick="addCart('{{this._id}}')">Agregar Carrito</button>
+  </div>
+</div>
+
+
+       
+        {{/each}}
+    </ul>
+</div>    
+ <input type="hidden" id="idCart" name="postId" value="{{cartnew}}" />
+
+<p>pagina {{product.page}} de {{product.totalPages}}</p>
+
+
+{{#if product.hasPrevPage}}
+<a href="/?page={{product.prevPage}}">Anterior</a>
+ {{/if}}
+
+{{#if product.hasNextPage}}
+<a href="/?page={{product.nextPage}}">Siguiente</a>
+ {{/if}}
+
+<script src="/socket.io/socket.io.js"></script>
+ <script>
+
+  const socket =io();
+
+  const addCart=(ids)=>{
+  
+
+  const idCart= document.getElementById("idCart").value;
+   
+    socket.emit("addCart",ids,idCart);
+     alert("producto agregado");
+  }
+
+
+
+ </script> 
